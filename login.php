@@ -10,13 +10,13 @@ if (isset($_POST['login'])) {
     var_dump($xml->user->$email);
  
     //login logic: check if user exist on the system then creates a session
-        foreach ($xml->user as $user) {
-            if ($user->email == $email && $user->password == $password) {
-                // echo "works";
-                session_start();
-                $_SESSION['email'] = $email;
-                header('Location: index.php');
-                die;
+    foreach ($xml->user as $user) {
+        if ($user->email == $email && $user->password == $password) {
+            // echo "works";
+            session_start();
+            $_SESSION['email'] = $email;
+            header('Location: index.php');
+            die;
         }
     }
     $error = true;

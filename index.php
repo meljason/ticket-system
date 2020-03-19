@@ -28,12 +28,13 @@ if (session_status() != PHP_SESSION_ACTIVE) {
             $users = simplexml_load_file('users/users.xml');
 
             foreach ($users->user as $user) {
-                echo '<tr><td>'.$user->email.'</td>'. '</tr>';
+                echo '<tr><td>'.$user->email.'</td></tr>';
             }
         ?>
     </table>
 
     <hr />
     <a href="logout.php"> Log Out</a>
+    <a href="tickets.php">Tickets</a>
 </body>
 </html>
