@@ -34,7 +34,13 @@ if (session_status() != PHP_SESSION_ACTIVE) {
     </table>
 
     <hr />
-    <a href="logout.php"> Log Out</a>
+    <?php
+        if (isset($_SESSION['email'])) {
+            echo '<a href="logout.php">Log Out</a>';
+        } else {
+            echo '<a href="login.php">Login</a>';
+        }
+    ?>
     <a href="tickets.php">Tickets</a>
 </body>
 </html>
