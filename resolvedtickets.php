@@ -54,6 +54,7 @@
                                 if (isset($_SESSION['email'])) {
                                     echo ", " . $_SESSION['email']; 
                                 }
+                                
                                 ?>
                             </div>
                             <div class="sign">
@@ -65,7 +66,8 @@
                                         echo ' | ';
                                         echo '<a href="register.php" class="text-dark text-decoration-none"> Register</a>';
                                     }
-                                ?>   
+                                ?>
+                                
                             </div>
                         </nav>
                     </div>
@@ -73,7 +75,7 @@
 
                 <div class="row issue-ticket-form">
                     <div class="col-md-12">
-                        <h1>Your tickets</h1>
+                        <h1>Your resolved tickets</h1>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -95,7 +97,9 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
+
             </div>
 </body>
 

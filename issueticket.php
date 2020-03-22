@@ -1,7 +1,3 @@
-<?php
-    session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,11 +45,12 @@
                 <div class="nav-top">
                     <div class="row">
                         <nav class="navbar navbar-expand navbar-light bg-white mb-4 static-top shadow justify-content-between" style="width: 100%; height: 4em;">
-                            <div class="mr-2 d-none d-lg-inline text-gray-600 small">Welcome
+                        <div class="mr-2 d-none d-lg-inline text-gray-600 small">Welcome
                                 <?php 
                                 if (isset($_SESSION['email'])) {
                                     echo ", " . $_SESSION['email']; 
                                 }
+                                
                                 ?>
                             </div>
                             <div class="sign">
@@ -62,10 +59,9 @@
                                         echo '<a href="logout.php" class="text-dark text-decoration-none"><i class="fas fa-sign-out-alt text-dark"></i> Sign Out</a>';
                                     } else {
                                         echo '<a href="login.php" class="text-dark text-decoration-none"><i class="fas fa-sign-in-alt text-dark"></i> Sign In</a>';
-                                        echo ' | ';
-                                        echo '<a href="register.php" class="text-dark text-decoration-none"> Register</a>';
                                     }
-                                ?>   
+                                ?>
+                                
                             </div>
                         </nav>
                     </div>
@@ -73,29 +69,25 @@
 
                 <div class="row issue-ticket-form">
                     <div class="col-md-12">
-                        <h1>Your tickets</h1>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Message</th>
-                                    <th scope="col">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                                $tickets = simplexml_load_file('tickets/tickets.xml');
+                        <form action="" method="post">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" id="title" placeholder="Enter ticket title">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Description</label>
+                                <textarea type="text" class="form-control" id="message" placeholder="Enter ticket description"></textarea>
+                            </div>
 
-                                foreach ($tickets->ticket as $ticket) {
-                                    if (isset($_SESSION['email'])) {
-                                        echo '<tr><td>'.$ticket->title.'</td><td>'.$ticket->supportMessage.'</td><td>'.$ticket->attributes()->status.'</td></tr>';                 
-                                    }
-                                }
-                            ?>
-                            </tbody>
-                        </table>
+                            <button type="submit" class="btn btn-dark">Submit</button>
+                        </form>
+                        <div class="alert alert-success mt-3" role="alert">
+                            Ticket issued succesfully. Go to "My tickets, to see your tickets!"
+                        </div>
                     </div>
+
                 </div>
+
             </div>
 </body>
 
