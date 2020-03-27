@@ -7,7 +7,7 @@ if (isset($_POST['login'])) {
 
     $xml = simplexml_load_file('users/users.xml');
 
-    var_dump($xml->user->$email);
+    // var_dump($xml->user->$email);
  
     //login logic: check if user exist on the system then creates a session
     foreach ($xml->user as $user) {
@@ -17,9 +17,10 @@ if (isset($_POST['login'])) {
             $_SESSION['email'] = $email;
             header('Location: index.php');
             die;
+        } else {
+            $error = true;
         }
     }
-    $error = true;
 }
 ?>
 
@@ -106,6 +107,12 @@ if (isset($_POST['login'])) {
 
                             <button type="submit" name="login" class="btn btn-dark">Submit</button>
                         </form>
+
+                        <?php
+                            if ($error == true) {
+                                echo '<div class="alert alert-danger mt-3" role="alert">Email or Password is wrong</div>';
+                            }
+                        ?>
                     </div>
 
                 </div>

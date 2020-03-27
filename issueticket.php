@@ -1,3 +1,56 @@
+<?php
+session_start();
+
+$errors = array();
+if(isset($_POST['issueticket'])) {
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+    $userEmail = $_SESSION['email'];
+
+    $date = date("j");
+    $day = date("D");
+    $month = date("F");
+    $year = date("Y");
+    $time = date("H:i A");
+
+    // var_dump($title);
+    // var_dump($description);
+
+    if ($title == '') {
+        $errors[] = "The title cannot be empty";
+    }
+    if ($description == '') {
+        $errors[] = "The desciption cannot be empty";
+    }
+
+    if (count($errors) == 0) {
+        // echo ("HELLO THERE");
+
+        $file = 'tickets/tickets.xml';
+        $xmlobj = simplexml_load_file($file);
+
+        // var_dump($xmlobj);
+
+        $tickets = $xmlobj->addChild('ticket');
+        
+        $tickets->addAttribute('status', 'requested');
+        $tickets->addChild('userEmail', $userEmail);
+        $tickets->addChild('title', $title);
+        $datetime = $tickets->addChild('datetime');
+        $datetime->addChild('date', $date);
+        $datetime->addChild('day', $day);
+        $datetime->addChild('month', $month);
+        $datetime->addChild('year', $year);
+        $datetime->addChild('time', $time);
+        $tickets->addChild('supportMessage', $description);
+        $xmlobj->asXML('tickets/tickets.xml');
+        header('Location: issueticket.php');
+        die;
+
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,18 +125,38 @@
                         <form action="" method="post">
                             <div class="form-group">
                                 <label for="title">Title</label>
-                                <input type="text" class="form-control" id="title" placeholder="Enter ticket title">
+                                <input type="text" name="title" class="form-control" id="title" placeholder="Enter ticket title">
                             </div>
                             <div class="form-group">
                                 <label for="message">Description</label>
-                                <textarea type="text" class="form-control" id="message" placeholder="Enter ticket description"></textarea>
+                                <textarea type="text" name="description" class="form-control" id="message" placeholder="Enter ticket description"></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-dark">Submit</button>
+                            <button type="submit" name="issueticket" class="btn btn-dark">Submit</button>
                         </form>
-                        <div class="alert alert-success mt-3" role="alert">
-                            Ticket issued succesfully. Go to "My tickets, to see your tickets!"
-                        </div>
+                        <?php
+
+                        if (isset($_SESSION['email'])) {
+                            // echo "IT WORKS BOIZ";
+                            if (isset($_POST['issueticket'])) {
+                                
+                                if (count($errors) > 0) {
+                                    echo '<div class="alert alert-danger mt-3" role="alert">';
+                                    echo '<ul>';
+                                    foreach ($errors as $e) {
+                                        echo '<li>'. $e .'</li>';
+                                    }
+                                    echo '</ul>';
+                                    echo '</div>';
+                                } else {
+                                    echo '<div class="alert alert-success mt-3" role="alert">Your ticket has been issued, go to your My Tickets to see your tickets</div>';
+                                }
+     
+                            }
+                        } else {
+                            echo '<div class="alert alert-danger mt-3" role="alert">Please log in to be able to submit a ticket</div>';
+                        }
+                        ?>
                     </div>
 
                 </div>

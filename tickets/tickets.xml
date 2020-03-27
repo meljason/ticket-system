@@ -1,27 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
-
+<?xml version="1.0" encoding="utf-8"?>
 <tickets>
-    <ticket ticketid="1" status="requested" userid="1">
-        <title>Computer power</title>
-        <datetime>
-            <date>12</date>
-            <day>Monday</day>
-            <month>October</month>
-            <year>2019</year>
-            <time>12:00 PM</time>
-        </datetime>
-        <supportMessage>The computer keeps turning on and off but it is intermediary</supportMessage>
-    </ticket>
-
-    <ticket ticketid="2" status="on-going" userid="2">
-        <title>Slow computer</title>
-        <datetime>
-            <date>21</date>
-            <day>Thursday</day>
-            <month>October</month>
-            <year>2019</year>
-            <time>03:00 PM</time>
-        </datetime>
-        <supportMessage>The computer is super slow and sometimes it lags</supportMessage>
-    </ticket>
-</tickets>
+    
+<ticket status="requested"><userEmail>jason@hotmail.com</userEmail><title>kk</title><datetime><date>27</date><day>Fri</day><month>March</month><year>2020</year><time>05:20 AM</time></datetime><supportMessage>nnj</supportMessage></ticket><ticket status="requested"><userEmail>jason@hotmail.com</userEmail><title>kkkk</title><datetime><date>27</date><day>Fri</day><month>March</month><year>2020</year><time>05:21 AM</time></datetime><supportMessage>kkkk</supportMessage></ticket><ticket status="requested"><userEmail>jason@hotmail.com</userEmail><title>lll</title><datetime><date>27</date><day>Fri</day><month>March</month><year>2020</year><time>05:23 AM</time></datetime><supportMessage>ll</supportMessage></ticket></tickets>

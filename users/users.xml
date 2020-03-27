@@ -12,4 +12,8 @@
         <email>whitneygloom@hotmail.com</email>
         <password>5efd5935913b175e4ea16e9bd9b6f53a</password>
     </user>
-<user><email>jasonchong@hotmail.com</email><password>e10adc3949ba59abbe56e057f20f883e</password></user></users>
+    <user>
+        <email>jasonchong@hotmail.com</email>
+        <password>e10adc3949ba59abbe56e057f20f883e</password>
+    </user>
+</users>
