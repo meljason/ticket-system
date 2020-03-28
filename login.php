@@ -114,10 +114,7 @@ if (isset($_POST['login'])) {
                             }
                         ?>
                     </div>
-
                 </div>
-
             </div>
 </body>
-
 </html>

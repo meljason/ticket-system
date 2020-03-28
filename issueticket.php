@@ -46,7 +46,6 @@ if(isset($_POST['issueticket'])) {
         $xmlobj->asXML('tickets/tickets.xml');
         header('Location: issueticket.php');
         die;
-
     }
 }
 ?>
@@ -87,14 +86,8 @@ if(isset($_POST['issueticket'])) {
 
         <!-- Page content -->
         <div id="page-content-wrapper">
-            <!-- Keep all page content within the page-content inset div! -->
             <div class="page-content inset">
-                <!-- <div class="row">
-                    <div class="col-md-12">
-                        <p class="well lead">An Experiment using the sidebar template from startbootstrap.com which I integrated in my website (<a href="http://animeshmanglik.name">animeshmanglik.name</a>)</p>
-                        <p class="well lead">Click on the Menu to Toggle Sidebar . Hope you enjoy it!</p>
-                    </div>
-                </div> -->
+                </div>
                 <div class="nav-top">
                     <div class="row">
                         <nav class="navbar navbar-expand navbar-light bg-white mb-4 static-top shadow justify-content-between" style="width: 100%; height: 4em;">
@@ -139,7 +132,7 @@ if(isset($_POST['issueticket'])) {
                         if (isset($_SESSION['email'])) {
                             // echo "IT WORKS BOIZ";
                             if (isset($_POST['issueticket'])) {
-                                
+                                // echo 'test issue ticket';
                                 if (count($errors) > 0) {
                                     echo '<div class="alert alert-danger mt-3" role="alert">';
                                     echo '<ul>';
@@ -148,20 +141,17 @@ if(isset($_POST['issueticket'])) {
                                     }
                                     echo '</ul>';
                                     echo '</div>';
-                                } else {
-                                    echo '<div class="alert alert-success mt-3" role="alert">Your ticket has been issued, go to your My Tickets to see your tickets</div>';
                                 }
-     
+                            } else {
+                                // echo 'test error count';
+                                echo '<div class="alert alert-success mt-3" role="alert">Your ticket has been issued, go to your My Tickets to see your tickets</div>';
                             }
                         } else {
                             echo '<div class="alert alert-danger mt-3" role="alert">Please log in to be able to submit a ticket</div>';
                         }
                         ?>
                     </div>
-
                 </div>
-
             </div>
 </body>
-
 </html>
