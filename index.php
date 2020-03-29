@@ -174,14 +174,19 @@ if (session_status() != PHP_SESSION_ACTIVE) {
                                                 $status = 'resolved';
                                                 $count = 0;
 
-                                                foreach ($xml->ticket as $ticket) {
-                                                    $tmp = $ticket->attributes();
-                                                    if($tmp['status'] == $status) {
-                                                        $count += 1;
-                                                    }
-                                                }    
+                                                if (isset($_SESSION['email'])) {
+                                                    foreach ($xml->ticket as $ticket) {
+                                                        $tmp = $ticket->attributes();
+                                                        if($tmp['status'] == $status) {
+                                                            $count += 1;
+                                                        }
+                                                    }  
+                                                    echo $count;
+                                                } else {
+                                                    $error = true;
+                                                    echo '-';
+                                                }
 
-                                                echo $count;
                                             
                                             ?>
                                             </div>
