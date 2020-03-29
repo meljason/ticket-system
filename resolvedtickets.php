@@ -89,7 +89,7 @@
                                 $tickets = simplexml_load_file('tickets/tickets.xml');
 
                                 foreach ($tickets->ticket as $ticket) {
-                                    if (isset($_SESSION['email'])) {
+                                    if (isset($_SESSION['email']) && $ticket->attributes()->status == 'resolved') {
                                         echo '<tr><td>'.$ticket->title.'</td><td>'.$ticket->supportMessage.'</td><td>'.$ticket->attributes()->status.'</td></tr>';                 
                                     }
                                 }

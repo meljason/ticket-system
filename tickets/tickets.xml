@@ -1,4 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tickets>
-    
+    <ticket status="requested">
+        <id>1</id>
+        <userEmail>jasonchong@hotmail.com</userEmail>
+        <title>web development</title>
+        <datetime>
+            <date>29</date>
+            <day>Sun</day>
+            <month>March</month>
+            <year>2020</year>
+            <time>03:45 AM</time>
+        </datetime>
+        <supportMessage>Submit button is not working</supportMessage>
+    </ticket>
+    <ticket status="requested">
+        <id>2</id>
+        <userEmail>jasonchong@hotmail.com</userEmail>
+        <title>Power Button</title>
+        <datetime>
+            <date>29</date>
+            <day>Sun</day>
+            <month>March</month>
+            <year>2020</year>
+            <time>03:46 AM</time>
+        </datetime>
+        <supportMessage>Computer in infinite loop</supportMessage>
+    </ticket>
+    <ticket status="requested">
+        <id>3</id>
+        <userEmail>bunny@hotmail.com</userEmail>
+        <title>Keyboard not working</title>
+        <datetime>
+            <date>29</date>
+            <day>Sun</day>
+            <month>March</month>
+            <year>2020</year>
+            <time>06:57 AM</time>
+        </datetime>
+        <supportMessage>The driver keeps crashing</supportMessage>
+    </ticket>
+    <ticket status="ongoing">
+        <id>4</id>
+        <userEmail>jason@hotmail.com</userEmail>
+        <title>Phone Screen turning on and off</title>
+        <datetime>
+            <date>29</date>
+            <day>Sun</day>
+            <month>March</month>
+            <year>2020</year>
+            <time>06:57 AM</time>
+        </datetime>
+        <supportMessage>Cannot use my phone</supportMessage>
+    </ticket>
+    <ticket status="ongoing">
+        <id>5</id>
+        <userEmail>bunny@hotmail.com</userEmail>
+        <title>This is another test</title>
+        <datetime>
+            <date>29</date>
+            <day>Sun</day>
+            <month>March</month>
+            <year>2020</year>
+            <time>06:57 AM</time>
+        </datetime>
+        <supportMessage>Lorem ipsum dolor sit amet consectetur adipisicing elit.</supportMessage>
+    </ticket>
+    <ticket status="ongoing">
+        <id>6</id>
+        <userEmail>bunny@hotmail.com</userEmail>
+        <title>MOuse keyboard</title>
+        <datetime>
+            <date>29</date>
+            <day>Sun</day>
+            <month>March</month>
+            <year>2020</year>
+            <time>06:57 AM</time>
+        </datetime>
+        <supportMessage>Hello this is MKBHD. And I have been using this for a week now</supportMessage>
+    </ticket>
+    <ticket status="resolved">
+        <id>7</id>
+        <userEmail>bunny@hotmail.com</userEmail>
+        <title>Welcome to my new</title>
+        <datetime>
+            <date>29</date>
+            <day>Sun</day>
+            <month>March</month>
+            <year>2020</year>
+            <time>06:57 AM</time>
+        </datetime>
+        <supportMessage>This is an edxample</supportMessage>
+    </ticket>
+    <ticket status="resolved">
+        <id>8</id>
+        <userEmail>bunny@hotmail.com</userEmail>
+        <title>Computer screen blinking</title>
+        <datetime>
+            <date>29</date>
+            <day>Sun</day>
+            <month>March</month>
+            <year>2020</year>
+            <time>06:57 AM</time>
+        </datetime>
+        <supportMessage>THis is a test adn lorem ipsum</supportMessage>
+    </ticket>
 </tickets>

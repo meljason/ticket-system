@@ -8,17 +8,19 @@ if (isset($_POST['login'])) {
     $xml = simplexml_load_file('users/users.xml');
 
     // var_dump($xml->user->$email);
- 
+
     //login logic: check if user exist on the system then creates a session
     foreach ($xml->user as $user) {
-        if ($user->email == $email && $user->password == $password) {
-            // echo "works";
+        if ($user->email == $email && $user->password == $password && $user->accountType == 'guest') {
             session_start();
             $_SESSION['email'] = $email;
             header('Location: index.php');
             die;
-        } else {
-            $error = true;
+        } else if ($user->email == $email && $user->password == $password && $user->accountType == 'admin') {
+            session_start();
+            $_SESSION['email'] = $email;
+            header('Location: admin/adminindex.php');
+            die;
         }
     }
 }

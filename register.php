@@ -27,6 +27,7 @@ if (isset($_POST['signup'])) {
         $xmlobj = simplexml_load_file($file);
         // var_dump($xmlobj);
         $users = $xmlobj->addChild('user');
+        $users->addChild('accountType', 'guest');
         $users->addChild('email', $email);
         $users->addChild('password', md5($password));
         $xmlobj->asXML('users/users.xml');

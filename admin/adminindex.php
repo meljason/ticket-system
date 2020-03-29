@@ -1,12 +1,10 @@
 <?php
 session_start();
-include('adminusers.php');
-$error = false;
 
 
 //reference: https://stackoverflow.com/questions/3538513/detect-if-php-session-exists
 if (session_status() != PHP_SESSION_ACTIVE) {
-    header('Location: login.php');
+    header('Location: ../login.php');
     die;
 }
 ?>
@@ -18,7 +16,7 @@ if (session_status() != PHP_SESSION_ACTIVE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
     <script src="js/script.js"></script>
 
@@ -37,13 +35,14 @@ if (session_status() != PHP_SESSION_ACTIVE) {
         <div id="sidebar-wrapper">
             <ul id="sidebar_menu" class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a id="menu-toggle">Ticketer</a>
+                    <a id="menu-toggle" href="../admin/adminindex.php">Ticketer</a>
                 </li>
             </ul>
             <ul class="sidebar-nav" id="sidebar">
-                <li><a href="tickets.php">My tickets</a></li>
-                <li><a href="ongoingtickets.php">On-going tickets</a></li>
-                <li><a href="resolvedtickets.php">Resolved tickets</a></li>
+                <li><a href="../admin/admintickets.php">Total tickets</a></li>
+                <li><a href="../admin/requestedticket.php">Requested tickets</a></li>
+                <li><a href="../admin/adminongoing.php">On-going tickets</a></li>
+                <li><a href="../admin/adminresolved.php">Resolved tickets</a></li>
             </ul>
         </div>
 
@@ -59,16 +58,16 @@ if (session_status() != PHP_SESSION_ACTIVE) {
                                     echo ", " . $_SESSION['email']; 
                                 }
                                 
-                                ?>
+                                ?> (Admin User)
                             </div>
                             <div class="sign">
                                 <?php
                                     if(isset($_SESSION['email'])) {
-                                        echo '<a href="logout.php" class="text-dark text-decoration-none"><i class="fas fa-sign-out-alt text-dark"></i> Sign Out</a>';
+                                        echo '<a href="../logout.php" class="text-dark text-decoration-none"><i class="fas fa-sign-out-alt text-dark"></i> Sign Out</a>';
                                     } else {
-                                        echo '<a href="login.php" class="text-dark text-decoration-none"><i class="fas fa-sign-in-alt text-dark"></i> Sign In</a>';
+                                        echo '<a href="../login.php" class="text-dark text-decoration-none"><i class="fas fa-sign-in-alt text-dark"></i> Sign In</a>';
                                         echo ' | ';
-                                        echo '<a href="register.php" class="text-dark text-decoration-none"> Register</a>';
+                                        echo '<a href="../register.php" class="text-dark text-decoration-none"> Register</a>';
                                     }
                                 ?>      
                             </div>
@@ -81,9 +80,6 @@ if (session_status() != PHP_SESSION_ACTIVE) {
                     <div class="dash-title d-sm-flex justify-content-between">
                         <div class="dashboard-title">
                             <h1>Dashboard</h1>
-                        </div>
-                        <div class="btn-issue-ticket">
-                            <a href="issueticket.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="far fa-plus-square"></i> Issue a ticket</a>
                         </div>
                     </div>
                 </div>
@@ -98,20 +94,9 @@ if (session_status() != PHP_SESSION_ACTIVE) {
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Tickets</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                         <?php
-                                            $xml = simplexml_load_file("tickets/tickets.xml");
-                                            $countUser = 0;
-
-                                            if (isset($_SESSION['email'])) {
-                                                foreach ($xml->ticket as $ticket) {
-                                                    if ($ticket->userEmail == $_SESSION['email']) {
-                                                        $countUser++;
-                                                    }
-                                                }
-                                                echo $countUser;
-                                            } else {
-                                                $error = true;
-                                                echo '-';
-                                            }
+                                            $xml = simplexml_load_file("../tickets/tickets.xml");
+                                            $count_ticket = $xml->ticket->count();
+                                            echo $count_ticket;
                                         ?>
                                     </div>
                                 </div>
@@ -131,24 +116,17 @@ if (session_status() != PHP_SESSION_ACTIVE) {
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">On-going Tickets</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                         <?php
-                                            $xml = simplexml_load_file("tickets/tickets.xml");
-                                            $status = 'ongoing';
+                                            $xml = simplexml_load_file("../tickets/tickets.xml");
+                                            $status = 'requested';
                                             $count = 0;
 
-                                            if (isset($_SESSION['email'])) {
-                                                foreach ($xml->ticket as $ticket) {
-                                                    $tmp = $ticket->attributes();
-                                                    if($tmp['status'] == $status && $ticket->userEmail == $_SESSION['email']) {
-                                                        $count++;
-                                                    }
-                                                }     
-                                                echo $count;
-                                            } else {
-                                                $error = true;
-                                                echo '-';
-                                            }
-
-                                            
+                                            foreach ($xml->ticket as $ticket) {
+                                                $tmp = $ticket->attributes();
+                                                if($tmp['status'] == $status) {
+                                                    $count += 1;
+                                                }
+                                            }    
+                                            echo $count;
                                         ?>
                                     </div>
                                 </div>
@@ -170,7 +148,7 @@ if (session_status() != PHP_SESSION_ACTIVE) {
                                         <div class="col-auto">
                                             <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
                                             <?php
-                                                $xml = simplexml_load_file("tickets/tickets.xml");
+                                                $xml = simplexml_load_file("../tickets/tickets.xml");
                                                 $status = 'resolved';
                                                 $count = 0;
 
@@ -195,16 +173,6 @@ if (session_status() != PHP_SESSION_ACTIVE) {
                         </div>
                     </div>
                 </div>
-
-                <?php
-                    if ($error == true) {
-                        echo '<div class="row">
-                                <div class="alert alert-warning" role="alert">
-                                    Please log in to view the dashboard.
-                                </div>
-                            </div>';
-                    }
-                ?>
             </div>
         </div>
     </div>

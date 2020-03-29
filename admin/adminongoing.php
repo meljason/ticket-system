@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
     <script src="js/script.js"></script>
 
@@ -27,12 +27,15 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul id="sidebar_menu" class="sidebar-nav">
-                <li class="sidebar-brand"><a id="menu-toggle" href="index.php">Ticketer</a></li>
+                <li class="sidebar-brand">
+                    <a id="menu-toggle" href="../admin/adminindex.php">Ticketer</a>
+                </li>
             </ul>
             <ul class="sidebar-nav" id="sidebar">
-                <li><a href="tickets.php">My tickets</a></li>
-                <li><a href="ongoingtickets.php">On-going tickets</a></li>
-                <li><a href="resolvedtickets.php">Resolved tickets</a></li>
+                <li><a href="../admin/admintickets.php">Total tickets</a></li>
+                <li><a href="../admin/requestedticket.php">Requested tickets</a></li>
+                <li><a href="../admin/adminongoing.php">On-going tickets</a></li>
+                <li><a href="../admin/adminresolved.php">Resolved tickets</a></li>
             </ul>
         </div>
 
@@ -54,20 +57,18 @@
                                 if (isset($_SESSION['email'])) {
                                     echo ", " . $_SESSION['email']; 
                                 }
-                                
                                 ?>
                             </div>
                             <div class="sign">
                                 <?php
                                     if(isset($_SESSION['email'])) {
-                                        echo '<a href="logout.php" class="text-dark text-decoration-none"><i class="fas fa-sign-out-alt text-dark"></i> Sign Out</a>';
+                                        echo '<a href="../logout.php" class="text-dark text-decoration-none"><i class="fas fa-sign-out-alt text-dark"></i> Sign Out</a>';
                                     } else {
-                                        echo '<a href="login.php" class="text-dark text-decoration-none"><i class="fas fa-sign-in-alt text-dark"></i> Sign In</a>';
+                                        echo '<a href="../login.php" class="text-dark text-decoration-none"><i class="fas fa-sign-in-alt text-dark"></i> Sign In</a>';
                                         echo ' | ';
-                                        echo '<a href="register.php" class="text-dark text-decoration-none"> Register</a>';
+                                        echo '<a href="../register.php" class="text-dark text-decoration-none"> Register</a>';
                                     }
-                                ?>
-                                
+                                ?>   
                             </div>
                         </nav>
                     </div>
@@ -75,10 +76,11 @@
 
                 <div class="row issue-ticket-form">
                     <div class="col-md-12">
-                        <h1>Your ongoing tickets</h1>
+                        <h1>Total tickets</h1>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th scope="col">User</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Message</th>
                                     <th scope="col">Status</th>
@@ -86,20 +88,23 @@
                             </thead>
                             <tbody>
                             <?php
-                                $tickets = simplexml_load_file('tickets/tickets.xml');
+                                $tickets = simplexml_load_file('../tickets/tickets.xml');
 
                                 foreach ($tickets->ticket as $ticket) {
                                     if (isset($_SESSION['email']) && $ticket->attributes()->status == 'ongoing') {
-                                        echo '<tr><td>'.$ticket->title.'</td><td>'.$ticket->supportMessage.'</td><td>'.$ticket->attributes()->status.'</td></tr>';                 
+                                        echo '<tr>
+                                                <td>'.$ticket->userEmail.'</td>
+                                                <td>'.$ticket->title.'</td>
+                                                <td>'.$ticket->supportMessage.'</td>
+                                                <td>'.$ticket->attributes()->status.'</td>
+                                            </tr>';                 
                                     }
                                 }
                             ?>
                             </tbody>
                         </table>
                     </div>
-
                 </div>
-
             </div>
 </body>
 

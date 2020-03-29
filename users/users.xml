@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <users>
     <user>
+        <accountType>guest</accountType>
         <email>jason@hotmail.com</email>
         <password>202cb962ac59075b964b07152d234b70</password>
     </user>
     <user>
+        <accountType>guest</accountType>
         <email>user@hotmail.com</email>
         <password>827ccb0eea8a706c4c34a16891f84e7b</password>
     </user>
     <user>
+        <accountType>guest</accountType>
         <email>whitneygloom@hotmail.com</email>
         <password>5efd5935913b175e4ea16e9bd9b6f53a</password>
     </user>
     <user>
+        <accountType>admin</accountType>
         <email>jasonchong@hotmail.com</email>
         <password>e10adc3949ba59abbe56e057f20f883e</password>
+    </user>
+    <user>
+        <accountType>guest</accountType>
+        <email>bunny@hotmail.com</email>
+        <password>827ccb0eea8a706c4c34a16891f84e7b</password>
     </user>
 </users>

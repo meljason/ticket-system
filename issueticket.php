@@ -2,7 +2,7 @@
 session_start();
 
 $errors = array();
-if(isset($_POST['issueticket'])) {
+if(isset($_POST['issueticket']) && isset($_SESSION['email'])) {
     $title = $_POST['title'];
     $description = $_POST['description'];
     $userEmail = $_SESSION['email'];
@@ -31,9 +31,16 @@ if(isset($_POST['issueticket'])) {
 
         // var_dump($xmlobj);
 
+        $num_tick = count($xmlobj);
+        // echo $num_tick;
+
+        //reference: https://stackoverflow.com/questions/16391651/get-the-latest-node-value-in-xml-file-using-php-code
+        $maxid = max(array_map('intval', $xmlobj->xpath("//id")));
+
         $tickets = $xmlobj->addChild('ticket');
         
         $tickets->addAttribute('status', 'requested');
+        $tickets->addChild('id', $maxid + 1);
         $tickets->addChild('userEmail', $userEmail);
         $tickets->addChild('title', $title);
         $datetime = $tickets->addChild('datetime');
@@ -44,7 +51,7 @@ if(isset($_POST['issueticket'])) {
         $datetime->addChild('time', $time);
         $tickets->addChild('supportMessage', $description);
         $xmlobj->asXML('tickets/tickets.xml');
-        header('Location: issueticket.php');
+        header('Location: index.php');
         die;
     }
 }
@@ -141,10 +148,10 @@ if(isset($_POST['issueticket'])) {
                                     }
                                     echo '</ul>';
                                     echo '</div>';
+                                } else {
+                                    echo '<div class="alert alert-success mt-3" role="alert">Your ticket has been issued, go to your My Tickets to see your tickets</div>';
                                 }
-                            } else {
-                                // echo 'test error count';
-                                echo '<div class="alert alert-success mt-3" role="alert">Your ticket has been issued, go to your My Tickets to see your tickets</div>';
+                            
                             }
                         } else {
                             echo '<div class="alert alert-danger mt-3" role="alert">Please log in to be able to submit a ticket</div>';
